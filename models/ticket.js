@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 let ticketSchema = new Schema({
     estado: {
-        type: Boolean,
+        type: String,
         required: false,
-        default: false
+        default: "CONFIRMADO"
     }
 })
 

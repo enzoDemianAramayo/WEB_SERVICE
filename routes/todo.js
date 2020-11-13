@@ -31,13 +31,8 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.findById(req.params.id, function(err, docs) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("Result : ", docs);
-            }
-        });
+        const empresa = await Ticket.findById(req.params.id);
+        res.json(empresa);
     }
 
     //Perfect, retorna un json

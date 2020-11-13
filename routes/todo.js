@@ -31,6 +31,7 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
+        // req.query.id se usa cuando mandas un string como parametro :'v
         Ticket.findById(req.query.id, function(err, result) {
             if (err) {
                 res.send(err);

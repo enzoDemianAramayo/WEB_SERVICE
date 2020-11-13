@@ -31,11 +31,11 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.findById(req.params.id, function(err, result) {
+        Ticket.findById(req.params._id, function(err, docs) {
             if (err) {
-                res.send(err);
+                console.log(err);
             } else {
-                res.json(result);
+                console.log("Result : ", docs);
             }
         });
     }

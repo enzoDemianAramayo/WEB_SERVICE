@@ -31,7 +31,7 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.findById(req.params._id, function(err, docs) {
+        Ticket.findById(req.params.id, function(err, docs) {
             if (err) {
                 console.log(err);
             } else {

@@ -9,14 +9,7 @@ class Todo {
         this.app.get('/getTickets/', this.getTickets)
         this.app.post('/newTicket', this.newTicket)
         this.app.put('/updateTicket', this.updateTicket)
-        this.app.get('/getTicket/:id', function(req, res) {
-            Ticket.findById(req.params.id).then(doc => {
-                if (!doc) {
-                    return res.status(404).end();
-                }
-                return res.status(200).json(doc);
-            }).catch(err => next(err));
-        })
+        this.app.get('/getTicket/:id', this.getTicket)
     }
 
     hello(req, res) {
@@ -38,37 +31,43 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-
+        Ticket.findById(req.params.id).then(doc => {
+            if (!doc) {
+                return res.status(404).end();
+            }
+            return res.status(200).json(doc);
+        }).catch(err => next(err));
     }
+}
 
-    //Perfect, retorna un json
-    newTicket(req, res) {
-        let item = new Ticket({
-            estado: req.body.estado
-        });
-        item.save(err => {
-            if (err) return res.status(500).send(err);
-            return res.status(200).send(item);
-        });
-    }
+//Perfect, retorna un json
+newTicket(req, res) {
+    let item = new Ticket({
+        estado: req.body.estado
+    });
+    item.save(err => {
+        if (err) return res.status(500).send(err);
+        return res.status(200).send(item);
+    });
+}
 
-    /*
-    {
-        "id":"5fa643dfec3fa12d44bc7faa",
-        "estado": true
-    }
-    */
-    updateTicket(req, res) {
-        Ticket.updateOne({ _id: req.body.id }, { estado: req.body.new_status }).then(doc => {
-            res.json({
-                ok: true
-            })
-        }, err => {
-            res.status(500).json({
-                error: 'Error al modificar ticket ' + req.body.id
-            })
+/*
+{
+    "id":"5fa643dfec3fa12d44bc7faa",
+    "estado": true
+}
+*/
+updateTicket(req, res) {
+    Ticket.updateOne({ _id: req.body.id }, { estado: req.body.new_status }).then(doc => {
+        res.json({
+            ok: true
         })
-    }
+    }, err => {
+        res.status(500).json({
+            error: 'Error al modificar ticket ' + req.body.id
+        })
+    })
+}
 }
 
 module.exports = new Todo().app;

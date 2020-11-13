@@ -9,7 +9,7 @@ class Todo {
         this.app.get('/getTickets/', this.getTickets)
         this.app.post('/newTicket', this.newTicket)
         this.app.put('/updateTicket', this.updateTicket)
-        this.app.get('/getTicket/:id', this.getTicket)
+        this.app.get('/getTicket/', this.getTicket)
     }
 
     hello(req, res) {
@@ -31,7 +31,8 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.findById(req.params.id, function(err, docs) {
+        var id = req.params.id;
+        Ticket.findById(id, function(err, docs) {
             if (err) {
                 console.log(err);
             } else {

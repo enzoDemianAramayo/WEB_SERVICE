@@ -31,8 +31,15 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        const empresa = await Ticket.findById(req.params.id);
-        res.json(empresa);
+        Ticket.findById(req.params.id).then(docs => {
+            res.json({
+                item: docs
+            })
+        }, err => {
+            res.status(500).json({
+                error: "Error al trer item"
+            })
+        })
     }
 
     //Perfect, retorna un json

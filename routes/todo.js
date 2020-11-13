@@ -9,7 +9,7 @@ class Todo {
         this.app.get('/getTickets/', this.getTickets)
         this.app.post('/newTicket', this.newTicket)
         this.app.put('/updateTicket', this.updateTicket)
-        this.app.get('/getTicket/', this.getTicket)
+        this.app.get('/getTicket/id/:id', this.getTicket)
     }
 
     hello(req, res) {

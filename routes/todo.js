@@ -31,9 +31,13 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.find(element => element._id == req.params.id);
-        if (Ticket) res.json(Ticket);
-        else res.sendStatus(404)
+        Ticket.findById(req.params.id, function(err, result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
+        });
     }
 
     //Perfect, retorna un json

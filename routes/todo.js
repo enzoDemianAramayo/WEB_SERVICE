@@ -31,12 +31,12 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        let item = new Ticket({
-            id: req.params.id
-        });
-        item.findById(err => {
-            if (err) return res.status(500).send(err);
-            return res.status(200).send(item);
+        Ticket.findById(req.params.id, function(err, result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
         });
     }
 

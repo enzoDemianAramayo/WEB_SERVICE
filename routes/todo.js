@@ -34,7 +34,7 @@ class Todo {
         // req.query.id se usa cuando mandas un string como parametro :'v
         Ticket.findById(req.query.id, function(err, result) {
             if (err) {
-                res.send(err);
+                return res.status(500).send(err);
             } else {
                 res.json(result);
             }

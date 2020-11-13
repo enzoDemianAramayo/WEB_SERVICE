@@ -7,9 +7,16 @@ class Todo {
 
         this.app.get('/', this.hello)
         this.app.get('/getTickets/', this.getTickets)
-        this.app.get('/getTicket/:id', this.getTicket)
         this.app.post('/newTicket', this.newTicket)
         this.app.put('/updateTicket', this.updateTicket)
+        this.app.get('/getTicket/:id', function(req, res) {
+            Ticket.findById(req.params.id).then(doc => {
+                if (!doc) {
+                    return res.status(404).end();
+                }
+                return res.status(200).json(doc);
+            }).catch(err => next(err));
+        })
     }
 
     hello(req, res) {
@@ -31,15 +38,7 @@ class Todo {
 
     //TODO, falta terminar el coso este, no me trae el que yo quiero
     getTicket(req, res) {
-        Ticket.findById(req.params.id).then(docs => {
-            res.json({
-                item: docs
-            })
-        }, err => {
-            res.status(500).json({
-                error: "Error al trer item"
-            })
-        })
+
     }
 
     //Perfect, retorna un json

@@ -35,9 +35,11 @@ class Todo {
         Ticket.findById(req.query.id, function(err, result) {
             if (err) {
                 return res.status(500).send(err);
-            } else {
-                res.json(result);
             }
+            return res.status(200).send(result);
+            //else {
+            //  res.json(result);
+            //}
         });
     }
 
